@@ -28,6 +28,8 @@ int main()
 			wordlist.push_back(word);
 		}
 		sort(wordlist.begin(), wordlist.end()); //사전식으로 정렬
+		//정렬 대신 탐색해서 삽입하는 방식이라면 훨씬 빠르다
+		//삽입할 때는 뒤에서 부터 하는게 효율적
 		for (auto it : wordlist) //출력
 		{
 			cout << it << " ";
