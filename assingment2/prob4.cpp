@@ -62,7 +62,9 @@ void print_person(Person& p) {
 void search_and(string line)
 {
 	vector<string> tokens = split_line(line, '&');
-	for (auto& p : directory)
+	for (auto& p : directory) //참조를 왜 하는 지 생각하고 쓰기
+		//벡터값을 직접 수정하는 경우라면 참조를 해야하고
+		//그런 경우가 아니면 없어도 된다.
 	{
 		int count = 0; //단어를 모두 포함하는 지 확인하기 위한 카운트
 		for (auto i : tokens) {
