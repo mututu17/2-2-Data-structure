@@ -17,7 +17,7 @@ void print_list()
 int n; //data의 개수
 void read_file()
 {
-	ifstream infile("rects.txt"); 
+	ifstream infile("rects.txt");
 	// rects.txt 파일을 읽어서 사각형들을 파일에 저장된 순서대로
 	// head가 가리키는 연결리스트에 저장한다.
 	infile >> n;
@@ -42,8 +42,9 @@ void read_file()
 void sort_by_area()
 {
 	// head가 가리키는 연결리스트를 면적순으로 정렬한다.
-	for(int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
+		bool isSwapped = false;
 		Node* q = head;
 		Node* prev = nullptr;
 		while (q->next != nullptr)
@@ -57,6 +58,7 @@ void sort_by_area()
 					head = tmp;
 				else
 					prev->next = tmp;
+				isSwapped = true;
 				prev = tmp;
 				q = tmp->next;
 			}
@@ -66,7 +68,8 @@ void sort_by_area()
 				q = q->next;
 			}
 		}
-
+		if (!isSwapped) //교환이 안일어났다 -> 더 이상 교환할 것이 없다.
+			break;
 	}
 	return;
 }
