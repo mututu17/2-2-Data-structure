@@ -42,7 +42,6 @@ void read_file()
 void sort_by_area()
 {
 	// head가 가리키는 연결리스트를 면적순으로 정렬한다.
-	Node* p = head;
 	for(int i = 0; i < n; i++)
 	{
 		Node* q = head;
