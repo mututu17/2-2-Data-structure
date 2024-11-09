@@ -1,34 +1,33 @@
 #include<iostream>
-#include<vector>
 using namespace std;
-vector<int> stack;
+#define max 1000000
+int mystack[max];
+int top_pos = -1;
+bool full()
+{
+	return top_pos == max;
+}
 bool empty()
 {
-	return stack.size() == 0;
+	return top_pos == -1;
 }
 void push(int c)
 {
-	for (auto it = stack.begin(); it != stack.end(); it++)
-	{
-		if (c <= *it) // 자신보다 크거나 같은 원소를 만나면
-		{
-			stack.insert(it, c); //그 위치에 삽입하여 오름차순 유지
-			return;
-		}
-	}
-	stack.push_back(c); //자신보다 큰 원소가 없으면 맨 뒤에 삽입
+	if (full())
+		throw runtime_error("stack_full");
+	mystack[++top_pos] = c;
 }
 void pop()
 {
 	if (empty())
 		throw runtime_error("stack_empty");
-	stack.erase(stack.end()-1); //마지막 원소 삭제
+	top_pos--;
 }
 int top()
 {
 	if (empty())
 		throw runtime_error("stack_empty");
-	return stack[stack.size()-1]; //벡터의 사이즈 반환
+	return mystack[top_pos];
 }
 int main()
 {
@@ -37,16 +36,14 @@ int main()
 	int num;
 	for (int i = 0; i < N; i++)
 	{
-		cin >> num;
-		while (!stack.empty()) //자신 보다 같거나 작은 원소들은 
+		cin >> num; //각 정수가 주어질 때 마다
+		//이전에 주어진 정수들 중에서
+		while (!empty() && top() <= num) //자신보다 작거나 같은 정수를 모두 제거한 후
 		{
-			if(top() <= num)
-				pop(); //모두 제거한다.
-			else
-				break;
+			pop();
 		}
-		push(num);
-		cout << stack.size() << " "; //남아있는 정수들의 개수 출력
+		push(num); //자신을 포함하여
+		cout << top_pos + 1 << " "; //남아있는 정수들의 개수 출력
 	}
 	return 0;
 }
