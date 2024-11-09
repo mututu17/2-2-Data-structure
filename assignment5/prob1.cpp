@@ -5,7 +5,7 @@ int mystack[max];
 int top_pos = -1;
 bool full()
 {
-	return top_pos == max;
+	return top_pos == max-1;
 }
 bool empty()
 {
