@@ -56,7 +56,7 @@ void process_op(char op) {
 			while (!operator_stack.empty() && precedence(op) <= precedence(top_op)) //op보다 우선순위가 높은 연산자 연산수행
 			{
 				operator_stack.pop(); 
-				if (top_op == '(') //op의 우선순위가 top_op보다 낮거나 같은데 
+				if (top_op == '(') //op의 우선순위가 top_op보다 낮거나 같은데
 					//top_op가 여는 괄호이면 op는 닫는 괄호라는 의미
 					break;
 				double result = eval_op(top_op); //top_op로 연산 수행
